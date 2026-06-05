@@ -1,0 +1,400 @@
+/* ==========================================================================
+   1. VARIABLES DE DISEÑO, PALETA PREMIUM & RESET
+   ========================================================================== */
+:root {
+    /* Paleta Solicitada: Tono clínico, limpio y pulcro */
+    --bg-light-clean: #f7faff;     
+    --bg-section-alt: #e2e8f0;     /* Gris claro para romper simetrías */
+    
+    /* Identidad Oficial Corporativa GHEISAR */
+    --primary-blue: #1b365d;       /* Azul marino profundo */
+    --cyan-glow: #00aae4;          /* Cian de alta visibilidad */
+    
+    /* Textos, Superficies y Sombras */
+    --bg-super-dark: #1a1e24;      /* Para el Footer de alto impacto */
+    --text-dark-meta: #334155;     /* Alta legibilidad para textos largos */
+    --text-white: #ffffff;
+    --text-gray: #94a3b8;
+    --white-pure: #ffffff;
+    
+    /* Curvas de Animación de Alto Rendimiento (60 FPS) */
+    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-light-clean);
+    color: var(--text-dark-meta);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .massive-text {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--primary-blue);
+}
+
+/* ==========================================================================
+   2. PRELOADER INMERSIVO
+   ========================================================================== */
+#preloader {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-light-clean);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease;
+}
+
+.loader-logo {
+    color: var(--primary-blue);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 10px;
+    margin-bottom: 20px;
+    animation: pulseText 1.5s infinite alternate;
+}
+
+.loader-bar {
+    width: 200px;
+    height: 4px;
+    background: rgba(27, 54, 93, 0.1);
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.loader-bar::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; height: 100%; width: 50%;
+    background: var(--cyan-glow);
+    animation: loading 1s infinite ease-in-out;
+}
+
+@keyframes pulseText { 0% { opacity: 0.5; } 100% { opacity: 1; text-shadow: 0 0 15px rgba(0,170,228,0.3); } }
+@keyframes loading { 0% { left: -50%; } 100% { left: 100%; } }
+
+/* ==========================================================================
+   3. CLASES DE UTILIDAD Y SECCIONES OBLICUAS
+   ========================================================================== */
+.container { 
+    max-width: 1300px; 
+    margin: 0 auto; 
+    padding: 0 2rem; 
+}
+
+.section-padding { padding: 8rem 0; }
+.text-cyan { color: var(--cyan-glow) !important; }
+.text-white { color: var(--text-white) !important; }
+.text-gray { color: var(--text-gray) !important; }
+.center { text-align: center; }
+
+.mt-2 { margin-top: 1rem; } 
+.mt-4 { margin-top: 3rem; }
+.mb-2 { margin-bottom: 1rem; } 
+.mb-4 { margin-bottom: 3rem; }
+.z-index-2 { z-index: 2; }
+.position-relative { position: relative; }
+
+.section-title { font-size: 3.5rem; line-height: 1.1; margin-bottom: 1rem; }
+.massive-text { font-size: 4.5rem; }
+.accent-line { height: 6px; width: 80px; background: var(--cyan-glow); margin: 1.5rem 0; }
+.center-line { margin: 1.5rem auto; }
+.line-sm { height: 3px; width: 40px; background: var(--cyan-glow); margin-top: 1rem; }
+
+/* Cortes Diagonales Estilo Avanzado */
+.slant-bottom { 
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); 
+    padding: 8rem 0 12rem 0; 
+}
+.slant-top { 
+    clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%); 
+    padding: 12rem 0 4rem 0; 
+    margin-top: -5rem; 
+}
+
+/* ==========================================================================
+   4. NAVEGACIÓN (STICKY DINÁMICO)
+   ========================================================================== */
+.navbar {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    padding: 1.5rem 0; transition: var(--transition-fast);
+}
+
+.nav-content { display: flex; justify-content: space-between; align-items: center; }
+.logo { height: 50px; transition: var(--transition-fast); }
+
+.nav-links a {
+    color: var(--primary-blue); text-decoration: none; font-weight: 700;
+    margin-left: 2.5rem; font-size: 0.9rem; letter-spacing: 1px; transition: var(--transition-fast);
+}
+.nav-links a:hover { color: var(--cyan-glow); }
+
+/* Activado por JavaScript al hacer scroll */
+.navbar.scrolled {
+    background: rgba(247, 250, 255, 0.95); 
+    backdrop-filter: blur(15px);
+    padding: 0.8rem 0;
+    box-shadow: 0 10px 30px rgba(27, 54, 93, 0.08);
+}
+.navbar.scrolled .logo { height: 42px; }
+
+.btn-nav {
+    border: 2px solid var(--primary-blue); padding: 0.6rem 1.5rem;
+    border-radius: 4px; color: var(--primary-blue) !important;
+}
+.btn-nav:hover { background: var(--primary-blue); color: var(--white-pure) !important; box-shadow: 0 5px 15px rgba(27, 54, 93, 0.2); }
+
+/* ==========================================================================
+   5. HERO SECTION (FUSIÓN CLARA ADAPTADA)
+   ========================================================================== */
+.hero.parallax-light {
+    height: 100vh; 
+    display: flex; 
+    align-items: center; 
+    position: relative;
+    background-color: var(--bg-light-clean);
+    background-image: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2053&auto=format&fit=crop');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.hero-overlay-light {
+    position: absolute; 
+    inset: 0;
+    background: linear-gradient(90deg, rgba(247, 250, 255, 0.96) 35%, rgba(247, 250, 255, 0.7) 100%);
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 900px; padding-top: 5rem; }
+
+.badge-light {
+    display: inline-block; 
+    background: rgba(0, 170, 228, 0.1); 
+    border: 1px solid var(--cyan-glow);
+    color: var(--primary-blue); 
+    padding: 0.4rem 1rem; 
+    font-weight: 700; 
+    font-size: 0.8rem;
+    letter-spacing: 2px; 
+    margin-bottom: 1.5rem; 
+    border-radius: 4px;
+}
+
+.hero h1.text-primary { 
+    color: var(--primary-blue) !important; 
+    font-size: 4.5rem; 
+    margin-bottom: 1.5rem; 
+}
+
+.hero-lead-dark { 
+    color: var(--text-dark-meta); 
+    font-size: 1.3rem; 
+    font-weight: 500; 
+    margin-bottom: 3rem; 
+    max-width: 750px; 
+    line-height: 1.6;
+}
+
+/* Botones Hero */
+.hero-actions { display: flex; gap: 1.5rem; }
+
+.btn-solid-dark, .btn-outline-dark {
+    padding: 1.2rem 2.5rem; font-family: 'Montserrat', sans-serif; font-weight: 800;
+    letter-spacing: 1px; text-decoration: none; transition: var(--transition-fast);
+    border-radius: 4px; display: inline-block;
+}
+
+.btn-solid-dark {
+    background: var(--primary-blue); 
+    color: var(--white-pure);
+    box-shadow: 0 10px 25px rgba(27, 54, 93, 0.2);
+}
+.btn-solid-dark:hover { 
+    background: var(--cyan-glow); 
+    box-shadow: 0 10px 25px rgba(0, 170, 228, 0.4); 
+    transform: translateY(-3px); 
+}
+
+.btn-outline-dark { border: 2px solid var(--primary-blue); color: var(--primary-blue); }
+.btn-outline-dark:hover { background: var(--primary-blue); color: var(--white-pure); transform: translateY(-3px); }
+
+/* ==========================================================================
+   6. SECCIÓN NOSOTROS (BLOQUE GRIS PREMIUM)
+   ========================================================================== */
+.about { background-color: #2a323d; color: var(--text-white); }
+.about .section-title { color: var(--text-white); }
+
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-text p { font-size: 1.15rem; margin-bottom: 1.5rem; color: #cbd5e1; line-height: 1.7; }
+
+.about-stats { display: flex; gap: 2rem; }
+.stat-box {
+    background: rgba(255, 255, 255, 0.05); 
+    border-left: 4px solid var(--cyan-glow);
+    padding: 2.5rem 2rem; 
+    flex: 1;
+    backdrop-filter: blur(5px);
+    border-radius: 4px;
+}
+.stat-box h3 { font-size: 3.5rem; color: var(--text-white); line-height: 1; margin-bottom: 0.5rem; }
+.stat-box p { color: var(--cyan-glow); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+
+/* ==========================================================================
+   7. SECCIÓN SERVICIOS (TARJETAS HOVER INVERSAS)
+   ========================================================================== */
+.services { padding: 8rem 0; background: var(--bg-section-alt); }
+.service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+
+.glass-card {
+    background: var(--white-pure); padding: 3.5rem 2.5rem; position: relative;
+    border-radius: 8px; box-shadow: 0 20px 40px rgba(27, 54, 93, 0.04);
+    transition: var(--transition-smooth); overflow: hidden;
+    border-bottom: 5px solid var(--primary-blue);
+}
+
+.glass-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 0;
+    background: var(--primary-blue); transition: var(--transition-smooth); z-index: 1;
+}
+
+.glass-card:hover { transform: translateY(-15px); box-shadow: 0 30px 60px rgba(27, 54, 93, 0.15); border-bottom-color: var(--cyan-glow); }
+.glass-card:hover::before { height: 100%; }
+
+.icon-wrapper {
+    font-family: 'Montserrat', sans-serif; font-size: 4rem; font-weight: 900;
+    color: rgba(27, 54, 93, 0.08); margin-bottom: 1rem; transition: var(--transition-smooth);
+    position: relative; z-index: 2; line-height: 1;
+}
+
+.glass-card h3 { font-size: 1.6rem; margin-bottom: 1rem; color: var(--primary-blue); position: relative; z-index: 2; transition: var(--transition-fast); }
+.glass-card p { color: #475569; position: relative; z-index: 2; transition: var(--transition-fast); line-height: 1.6; }
+
+.check-list { list-style: none; position: relative; z-index: 2; }
+.check-list li { margin-bottom: 0.8rem; font-weight: 600; color: var(--primary-blue); display: flex; align-items: center; transition: var(--transition-fast); }
+.check-list li::before { content: '■'; color: var(--cyan-glow); margin-right: 10px; font-size: 0.8rem; }
+
+/* Inversión de color en Hover */
+.glass-card:hover .icon-wrapper { color: rgba(255, 255, 255, 0.1); }
+.glass-card:hover h3 { color: var(--text-white); }
+.glass-card:hover p { color: #e2e8f0; }
+.glass-card:hover .check-list li { color: var(--text-white); }
+
+/* ==========================================================================
+   8. VALOR / DIFERENCIADORES (IMPACT BANNER PARALLAX)
+   ========================================================================== */
+.impact-banner {
+    padding: 10rem 0; position: relative;
+    background: url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop') center/cover fixed;
+}
+.overlay-heavy { position: absolute; inset: 0; background: rgba(42, 50, 61, 0.88); mix-blend-mode: multiply; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; text-align: center; }
+
+.impact-item {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 3rem 1.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    transition: var(--transition-fast);
+}
+
+.impact-item h4 { font-size: 1.3rem; }
+
+.impact-item:hover {
+    background: rgba(0, 170, 228, 0.15);
+    border-color: var(--cyan-glow);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 170, 228, 0.2);
+}
+
+/* ==========================================================================
+   9. PRODUCTOS
+   ========================================================================== */
+.products { background-color: var(--bg-light-clean); text-align: center; }
+.product-content { max-width: 800px; margin: 0 auto; }
+.product-content p { font-size: 1.2rem; line-height: 1.7; color: var(--text-dark-meta); }
+
+/* ==========================================================================
+   10. FOOTER CORPORATIVO TOTAL
+   ========================================================================== */
+.footer { background-color: var(--bg-super-dark); color: var(--text-white); }
+.footer-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 6rem; padding-bottom: 4rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.footer-brand p { font-size: 1.1rem; line-height: 1.6; }
+
+.contact-item { display: flex; align-items: flex-start; gap: 1.2rem; margin-bottom: 1.8rem; }
+.contact-item .icon { font-size: 1.6rem; line-height: 1; }
+.contact-item p { color: #cbd5e1; font-size: 1.05rem; line-height: 1.5; }
+
+.footer-bottom { padding-top: 2rem; text-align: center; color: rgba(255,255,255,0.3); font-size: 0.9rem; font-weight: 600; letter-spacing: 1px; }
+
+/* ==========================================================================
+   11. FLOATING ACCION INTERACTIVA
+   ========================================================================== */
+.floating-cta {
+    position: fixed; bottom: 40px; right: 40px; z-index: 999;
+    background: var(--cyan-glow); color: var(--bg-super-dark); width: 85px; height: 85px;
+    border-radius: 50%; display: flex; justify-content: center; align-items: center;
+    text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 0.75rem; letter-spacing: 1px;
+    box-shadow: 0 10px 30px rgba(0,170,228,0.4); transition: var(--transition-fast);
+}
+
+.floating-cta:hover { transform: scale(1.1); background: var(--white-pure); color: var(--primary-blue); }
+.pulse-ring {
+    position: absolute; width: 100%; height: 100%; border-radius: 50%;
+    border: 2px solid var(--cyan-glow); z-index: -1; animation: pulse 2s infinite;
+}
+@keyframes pulse { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
+
+/* ==========================================================================
+   12. SKEW & REVEAL ENGINE (INTERSECTION OBSERVER)
+   ========================================================================== */
+.reveal { opacity: 0; visibility: hidden; will-change: transform, opacity; }
+.reveal.visible { opacity: 1; visibility: visible; }
+
+.scale-up { transform: scale(0.93); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.15); }
+.scale-up.visible { transform: scale(1); }
+
+.fade-up { transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.fade-up.visible { transform: translateY(0); }
+
+.fade-in-right { transform: translateX(-40px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+.fade-in-right.visible { transform: translateX(0); }
+
+.stagger-1 { transition-delay: 0.1s; } 
+.stagger-2 { transition-delay: 0.25s; } 
+.stagger-3 { transition-delay: 0.4s; }
+
+/* ==========================================================================
+   13. RESPONSIVE BREAKPOINTS (MOBILE OPTIMIZATION)
+   ========================================================================== */
+@media (max-width: 1024px) {
+    .about-grid, .service-grid, .grid-3, .footer-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+    .hero h1.text-primary { font-size: 3rem; }
+    .section-title { font-size: 2.6rem; }
+    .massive-text { font-size: 3.2rem; }
+    .slant-bottom { clip-path: none; padding: 6rem 0; }
+    .slant-top { clip-path: none; padding: 6rem 0; margin-top: 0; }
+    .nav-links { display: none; /* Ideal para complementar con menú responsive */ }
+    .hero.parallax-light, .impact-banner { background-attachment: scroll; } /* Suavizado móvil */
+}

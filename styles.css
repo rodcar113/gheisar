@@ -22,6 +22,15 @@
     --transition-smooth: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+
+.hero h1.text-primary .title-navy {
+    color: #1b365d;
+}
+
+.hero h1.text-primary .title-surgery-blue {
+    color: #2696b7;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -183,7 +192,8 @@ h1, h2, h3, h4, .massive-text {
 .hero-overlay-light {
     position: absolute; 
     inset: 0;
-    background: linear-gradient(90deg, rgba(247, 250, 255, 0.96) 35%, rgba(247, 250, 255, 0.7) 100%);
+    display: none;
+    background: transparent;
 }
 
 .hero-content { position: relative; z-index: 2; max-width: 900px; padding-top: 5rem; }
@@ -205,6 +215,7 @@ h1, h2, h3, h4, .massive-text {
     color: var(--primary-blue) !important; 
     font-size: 4.5rem; 
     margin-bottom: 1.5rem; 
+    text-transform: none;
 }
 
 .hero-lead-dark { 
@@ -511,4 +522,90 @@ h1, h2, h3, h4, .massive-text { font-family: 'Montserrat', sans-serif; text-tran
     
     .stat-box { padding: 1.5rem !important; }
     .stat-box h3 { font-size: 2.5rem !important; }
+}
+/* Ajustes finales solicitados para el hero */
+.hero-overlay-light {
+    display: none !important;
+    background: transparent !important;
+}
+
+.hero h1.text-primary {
+    text-transform: none !important;
+}
+
+.hero h1.text-primary .title-navy {
+    color: #1b365d !important;
+}
+
+.hero h1.text-primary .title-surgery-blue {
+    color: #6ec6e8 !important;
+}
+
+/* Composición final del hero: texto alineado a la izquierda como ejemplo.jpeg */
+.hero.parallax-light {
+    justify-content: flex-start !important;
+    background-position: center right !important;
+}
+
+.hero.parallax-light .container {
+    width: 100%;
+}
+
+.hero-content {
+    max-width: 540px !important;
+    margin-left: 0 !important;
+    padding: 3.25rem 2.75rem !important;
+    border-radius: 34px !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    box-shadow: 0 24px 70px rgba(27, 54, 93, 0.10) !important;
+    text-align: left !important;
+}
+
+.hero h1.text-primary {
+    max-width: 500px !important;
+    margin-bottom: 2rem !important;
+    font-size: clamp(2.9rem, 4.4vw, 4.9rem) !important;
+    line-height: 1.02 !important;
+    letter-spacing: -0.06em !important;
+    text-align: left !important;
+}
+
+.hero h1.text-primary .title-navy,
+.hero h1.text-primary .title-surgery-blue {
+    display: inline !important;
+}
+
+.hero-lead-dark {
+    max-width: 460px !important;
+    color: #1f2f46 !important;
+    text-align: left !important;
+}
+
+.hero-actions {
+    justify-content: flex-start !important;
+}
+
+@media (max-width: 1024px) {
+    .hero-content {
+        max-width: 500px !important;
+        padding: 2.5rem 2rem !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero.parallax-light {
+        background-position: 64% center !important;
+    }
+
+    .hero-content {
+        max-width: calc(100% - 1rem) !important;
+        padding: 2rem 1.5rem !important;
+        margin: 0 auto !important;
+        background: rgba(255, 255, 255, 0.90) !important;
+    }
+
+    .hero h1.text-primary {
+        font-size: clamp(2rem, 10vw, 3rem) !important;
+        line-height: 1.08 !important;
+    }
 }

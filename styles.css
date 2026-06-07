@@ -28,7 +28,7 @@
 }
 
 .hero h1.text-primary .title-surgery-blue {
-    color: #2696b7;
+    color: #00aae4 !important;  /* Mismo color que el hover del botón Contáctanos */
 }
 
 * {
@@ -231,7 +231,7 @@ h1, h2, h3, h4, .massive-text {
 .hero-actions { display: flex; gap: 1.5rem; }
 
 .btn-solid-dark, .btn-outline-dark {
-    padding: 1.2rem 2.5rem; font-family: 'Montserrat', sans-serif; font-weight: 800;
+    padding: 2rem 2.5rem; font-family: 'Montserrat', sans-serif; font-weight: 800;
     letter-spacing: 1px; text-decoration: none; transition: var(--transition-fast);
     border-radius: 4px; display: inline-block;
 }
@@ -541,43 +541,15 @@ h1, h2, h3, h4, .massive-text { font-family: 'Montserrat', sans-serif; text-tran
     color: #6ec6e8 !important;
 }
 
-/* Composición final del hero: texto alineado a la izquierda como ejemplo.jpeg */
-.hero.parallax-light {
-    justify-content: flex-start !important;
-    background-position: center right !important;
-}
-
-.hero.parallax-light .container {
-    width: 100%;
-}
-
-.hero-content {
-    max-width: 540px !important;
-    margin-left: 0 !important;
-    padding: 3.25rem 2.75rem !important;
-    border-radius: 34px !important;
-    background: rgba(255, 255, 255, 0.88) !important;
-    box-shadow: 0 24px 70px rgba(27, 54, 93, 0.10) !important;
-    text-align: left !important;
-}
-
+/* Hero text adjustments */
 .hero h1.text-primary {
-    max-width: 500px !important;
-    margin-bottom: 2rem !important;
-    font-size: clamp(2.9rem, 4.4vw, 4.9rem) !important;
-    line-height: 1.02 !important;
-    letter-spacing: -0.06em !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700 !important;  /* Bold */
     text-align: left !important;
+    font-size: 3.375rem !important;  /* 75% del tamaño original */
 }
 
-.hero h1.text-primary .title-navy,
-.hero h1.text-primary .title-surgery-blue {
-    display: inline !important;
-}
-
-.hero-lead-dark {
-    max-width: 460px !important;
-    color: #1f2f46 !important;
+.hero .hero-lead-dark {
     text-align: left !important;
 }
 
@@ -585,27 +557,209 @@ h1, h2, h3, h4, .massive-text { font-family: 'Montserrat', sans-serif; text-tran
     justify-content: flex-start !important;
 }
 
-@media (max-width: 1024px) {
-    .hero-content {
-        max-width: 500px !important;
-        padding: 2.5rem 2rem !important;
+
+/* ==========================================================================
+   14. CORRECCIÓN DE RENDERIZADO DE TEXTO - BORDES LISOS
+   ========================================================================== */
+
+/* Corrección del tamaño y suavizado del Hero */
+.hero h1.text-primary {
+    font-size: 4rem !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 700 !important;
+    text-align: left !important;
+    letter-spacing: -1.5px !important;  /* Aumentado para efecto semicomprimido */
+    word-spacing: -1px !important;      /* Reduce espacio entre palabras */
+}
+
+/* Suavizado de texto para todos los navegadores */
+.hero h1.text-primary,
+.hero h1.text-primary span,
+h1, h2, h3, h4, p, .massive-text {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-smooth: always;
+}
+
+/* Mejora específica para el texto del Hero */
+.title-navy, .title-surgery-blue {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Alineación izquierda consistente */
+.hero .hero-lead-dark {
+    text-align: left !important;
+}
+
+.hero-actions {
+    justify-content: flex-start !important;
+}
+
+
+/* ==========================================================================
+   15. CONTROL DE MARGEN IZQUIERDO DEL HERO (PERSONALIZABLE)
+   ========================================================================== */
+
+/* Variable de control - Cambia SOLO este valor para ajustar el margen */
+:root {
+    --hero-margin-left: 8rem;  /* Valor por defecto: 2rem = 32px */
+    /* Valores sugeridos:
+       0rem  = completamente pegado
+       1rem  = margen pequeño (16px)
+       2rem  = margen estándar (32px) 
+       3rem  = margen grande (48px)
+       5rem  = margen muy grande (80px)
+    */
+}
+
+/* Aplicar el margen solo al texto del Hero */
+.hero.parallax-light .container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: 100% !important;
+}
+
+.hero.parallax-light .hero-content {
+    padding-left: var(--hero-margin-left) !important;
+    margin-left: 0 !important;
+    max-width: 900px;
+}
+
+/* Asegurar que el texto respete el margen izquierdo */
+.hero h1.text-primary,
+.hero .hero-lead-dark,
+.hero-actions {
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+}
+
+/* ==========================================================================
+   15.1 RESPONSIVE - Ajuste automático en móviles
+   ========================================================================== */
+@media (max-width: 768px) {
+    :root {
+        --hero-margin-left: 1rem;  /* Margen más pequeño en móviles */
     }
 }
 
-@media (max-width: 767px) {
-    .hero.parallax-light {
-        background-position: 64% center !important;
-    }
+/* ==========================================================================
+   BOTONES DEL HERO - VERSIÓN CORREGIDA
+   ========================================================================== */
 
-    .hero-content {
-        max-width: calc(100% - 1rem) !important;
-        padding: 2rem 1.5rem !important;
-        margin: 0 auto !important;
-        background: rgba(255, 255, 255, 0.90) !important;
-    }
+/* Botón Contáctanos (WhatsApp) */
+.btn-solid-dark {
+    background: var(--primary-blue) !important;
+    color: var(--white-pure) !important;
+    border-radius: 12px !important;
+    padding: 1.2rem 2rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: capitalize !important;
+    font-size: 1rem !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    text-decoration: none !important;
+    border: none !important;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(27, 54, 93, 0.2);
+}
 
-    .hero h1.text-primary {
-        font-size: clamp(2rem, 10vw, 3rem) !important;
-        line-height: 1.08 !important;
+.btn-solid-dark:hover {
+    background: var(--cyan-glow) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 25px rgba(0, 170, 228, 0.4) !important;
+}
+
+/* Icono WhatsApp (SVG blanco) */
+.btn-solid-dark::before {
+    content: "" !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.5 3.45 1.44 4.94L2 22l5.33-1.56c1.46.85 3.12 1.3 4.81 1.3 5.46 0 9.91-4.45 9.91-9.91 0-5.45-4.45-9.9-9.91-9.9zm0 18.23c-1.5 0-2.97-.41-4.24-1.19l-.31-.18-3.15.93.99-3.13-.2-.32c-.83-1.28-1.27-2.75-1.27-4.24 0-4.53 3.69-8.22 8.22-8.22 4.53 0 8.22 3.69 8.22 8.22-.01 4.53-3.7 8.22-8.23 8.22zM17.1 14.37c-.25.71-1.4 1.31-2.1 1.37-.52.05-1.07.12-2.46-.55-1.48-.71-2.44-2.49-2.52-2.61-.09-.12-1.02-1.33-.96-2.57.05-1.05.7-1.83.96-2.13.09-.11.24-.17.39-.17h.63c.14 0 .27.06.35.16l.97 1.36c.09.13.1.3.02.44l-.4.63c-.1.14-.13.31-.06.47.19.41.77 1.3 1.53 1.81.63.42 1.4.57 1.89.63.28.04.56-.03.76-.24.28-.29.53-.65.69-1.03.07-.17.23-.27.41-.24l1.5.23c.2.03.35.2.31.4-.13.83-.56 1.79-1.47 2.34-.02.01-.04.02-.05.03z'/%3E%3C/svg%3E") !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    width: 20px !important;
+    height: 20px !important;
+    display: inline-block !important;
+}
+
+.btn-solid-dark:hover::before {
+    transform: scale(1.1);
+}
+
+/* Botón Conocer Servicios */
+.btn-outline-dark {
+    background: transparent !important;
+    color: var(--primary-blue) !important;
+    border: 2px solid var(--primary-blue) !important;
+    border-radius: 12px !important;
+    padding: 1.2rem 2rem !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    text-transform: capitalize !important;
+    font-size: 1rem !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.btn-outline-dark:hover {
+    background: var(--primary-blue) !important;
+    color: var(--white-pure) !important;
+    transform: translateY(-3px) !important;
+}
+
+/* Icono Flecha */
+.btn-outline-dark::after {
+    content: "→" !important;
+    font-size: 1.2rem !important;
+    display: inline-block !important;
+    transition: transform 0.3s ease !important;
+    color: inherit !important;
+}
+
+.btn-outline-dark:hover::after {
+    transform: translateX(5px) !important;
+}
+
+/* Contenedor de botones */
+.hero-actions {
+    display: flex !important;
+    gap: 1.5rem !important;
+    justify-content: flex-start !important;
+    margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .btn-solid-dark,
+    .btn-outline-dark {
+        padding: 0.7rem 1.5rem !important;
+        font-size: 0.85rem !important;
+        border-radius: 10px !important;
+    }
+    
+    .btn-solid-dark::before {
+        width: 18px !important;
+        height: 18px !important;
+    }
+    
+    .btn-outline-dark::after {
+        font-size: 1rem !important;
+    }
+    
+    .hero-actions {
+        flex-direction: column !important;
+        gap: 1rem !important;
     }
 }

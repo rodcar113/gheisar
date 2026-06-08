@@ -1883,6 +1883,7 @@ body.is-android .navbar {
     transform: scale(1.06) !important;
 }
 
+
 /* ==========================================================================
    AJUSTE MÓVIL — HERO DEBAJO DEL MENÚ
    ========================================================================== */
@@ -1903,5 +1904,52 @@ body.is-android .navbar {
 
     .hero.parallax-light .hero-content {
         padding-top: 2rem !important;
+    }
+}
+
+/* ==========================================================================
+   AJUSTE MÓVIL — TEXTO PEGADO DEBAJO DE BG1.JPEG
+   ========================================================================== */
+
+:root {
+    --mobile-navbar-height: 86px;     /* altura del menú */
+    --hero-mobile-image-height: 52vh; /* altura visible de bg1.jpeg */
+    --hero-mobile-text-gap: 0.25rem;  /* espacio entre imagen y texto */
+}
+
+@media (max-width: 768px) {
+    .hero.parallax-light {
+        margin-top: var(--mobile-navbar-height) !important;
+        min-height: auto !important;
+        height: auto !important;
+
+        background-size: contain !important;
+        background-position: center top !important;
+        background-repeat: no-repeat !important;
+        background-color: #f7fbff !important;
+
+        padding-top: calc(var(--hero-mobile-image-height) + var(--hero-mobile-text-gap)) !important;
+        padding-bottom: 3rem !important;
+    }
+
+    .hero.parallax-light .hero-content {
+        padding-top: 0 !important;
+        margin-top: 0 !important;
+    }
+
+    .hero h1.text-primary {
+        margin-top: 0 !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero.parallax-light {
+        padding-top: 0 !important; /* elimina espacio extra arriba */
+        padding-bottom: 1rem !important; /* opcional: espacio mínimo debajo */
+    }
+
+    .hero.parallax-light .hero-content {
+        margin-top: 0 !important; /* asegura que el contenido comience justo debajo */
+        padding-top: 0 !important;
     }
 }

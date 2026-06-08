@@ -1944,12 +1944,22 @@ body.is-android .navbar {
 
 @media (max-width: 767px) {
     .hero.parallax-light {
-        padding-top: 0 !important; /* elimina espacio extra arriba */
+        padding-top: 1rem !important; /* elimina espacio extra arriba */
         padding-bottom: 1rem !important; /* opcional: espacio mínimo debajo */
     }
 
     .hero.parallax-light .hero-content {
         margin-top: 0 !important; /* asegura que el contenido comience justo debajo */
         padding-top: 0 !important;
+    }
+}
+
+/* ==========================================================================
+   AJUSTE MÓVIL — ESPACIO ENTRE TÍTULO Y TEXTO DEL HERO
+   ========================================================================== */
+
+@media (max-width: 767px) {
+    .hero h1.text-primary {
+	margin-bottom: 4.8rem !important; /* aprox. 3 renglones de espacio */
     }
 }

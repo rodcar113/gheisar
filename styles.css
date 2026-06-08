@@ -1882,3 +1882,26 @@ body.is-android .navbar {
     filter: brightness(0) invert(1) !important;
     transform: scale(1.06) !important;
 }
+
+/* ==========================================================================
+   AJUSTE MÓVIL — HERO DEBAJO DEL MENÚ
+   ========================================================================== */
+
+:root {
+    --mobile-navbar-height: 86px; /* Ajusta aquí la altura del menú móvil */
+}
+
+@media (max-width: 768px) {
+    .hero.parallax-light {
+        margin-top: var(--mobile-navbar-height) !important;
+        min-height: calc(100vh - var(--mobile-navbar-height)) !important;
+        background-position: center top !important;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        background-color: #f7fbff !important;
+    }
+
+    .hero.parallax-light .hero-content {
+        padding-top: 2rem !important;
+    }
+}
